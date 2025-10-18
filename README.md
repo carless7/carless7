@@ -22,5 +22,5 @@ Here are some ideas to get you started:
 🎧 Music lover
 
 ## Connect with me
-- [LinkedIn](https://www.linkedin.com/in/your-linkedin-profile)
+- [LinkedIn](https://www.linkedin.com/in/carles-sanchez)
 - [GitHub](https://github.com/carless7)
