@@ -23,4 +23,3 @@ Here are some ideas to get you started:
 
 ## Connect with me
 - [LinkedIn](https://www.linkedin.com/in/carles-sanchez)
-- [GitHub](https://github.com/carless7)
