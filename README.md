@@ -14,9 +14,9 @@ Here are some ideas to get you started:
 -->
 # Hi there 👋 I'm Carles
 
-🎓 Master's Student in Informatics Engineering  
-💻 Mostly coding in Python, Java, Kotlin, C, C++, Bash  
-📊 Passionate about Data Science & Machine Learning  
+🎓 Master's Student in Informatics Engineering and AI Researcher at [GREIA]{https://greia.udl.cat/} 
+💻 Mostly coding in Python and C/C++  
+📊 Passionate about data science, ML & cybersecurity  
 🎶 Currently working on a music recommendation project in the [SpotifAI](https://github.com/orgs/spotifai-tfg) organization  
 ⚽️ Huge fan of FC Barcelona  
 🎧 Music lover
