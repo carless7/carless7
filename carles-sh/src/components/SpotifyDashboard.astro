@@ -1,0 +1,339 @@
+---
+const { artists = [], playlists = [], nowPlaying = null, error = '' } = Astro.props;
+
+const currentTrack = nowPlaying?.item;
+const currentArtists = currentTrack?.artists?.map((artist) => artist.name).join(', ');
+const currentImage = currentTrack?.album?.images?.[0]?.url;
+const isPlaying = Boolean(nowPlaying?.is_playing);
+---
+
+<section class="spotify-dashboard" aria-label="Spotify music dashboard">
+  <div class="player-shell">
+    <div class="player-top">
+      <span>carles.sh music</span>
+      <span>{error ? 'offline' : 'online'}</span>
+    </div>
+
+    <div class="now-playing">
+      <div class="album-art">
+        {currentImage ? (
+          <img src={currentImage} alt={`Album artwork for ${currentTrack.name}`} loading="lazy" />
+        ) : (
+          <span aria-hidden="true"></span>
+        )}
+      </div>
+
+      <div class="track-screen">
+        <p class="screen-label">{isPlaying ? 'Now Playing' : 'Playback'}</p>
+        {error ? (
+          <>
+            <h2>Spotify connection pending</h2>
+            <p>{error}</p>
+          </>
+        ) : currentTrack ? (
+          <>
+            <h2>{currentTrack.name}</h2>
+            <p>{currentArtists}</p>
+          </>
+        ) : (
+          <>
+            <h2>Nothing playing right now</h2>
+            <p>Start Spotify and this panel will update on the next request.</p>
+          </>
+        )}
+      </div>
+    </div>
+
+    <div class="transport" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div class="dashboard-grid">
+    <section class="media-panel artist-panel">
+      <div class="panel-heading">
+        <p class="eyebrow">Top artists</p>
+        <h2>Current listening shape</h2>
+      </div>
+
+      {artists.length > 0 ? (
+        <ol class="artist-list">
+          {artists.map((artist) => (
+            <li>
+              <img src={artist.images?.[2]?.url || artist.images?.[0]?.url} alt="" loading="lazy" />
+              <a href={artist.external_urls?.spotify}>{artist.name}</a>
+            </li>
+          ))}
+        </ol>
+      ) : (
+        <p class="empty-state">Artist data will appear here after the Spotify connection is available.</p>
+      )}
+    </section>
+
+    <section class="media-panel playlist-panel">
+      <div class="panel-heading">
+        <p class="eyebrow">Playlists</p>
+        <h2>Public shelves</h2>
+      </div>
+
+      {playlists.length > 0 ? (
+        <div class="playlist-grid">
+          {playlists.map((playlist) => (
+            <a class="playlist-card" href={playlist.external_urls?.spotify}>
+              <img src={playlist.images?.[0]?.url} alt="" loading="lazy" />
+              <span>{playlist.name}</span>
+              <small>{playlist.tracks?.total ?? 0} tracks</small>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <p class="empty-state">Playlist data will appear here after the Spotify connection is available.</p>
+      )}
+    </section>
+  </div>
+</section>
+
+<style>
+  .spotify-dashboard {
+    display: grid;
+    gap: 16px;
+  }
+
+  .player-shell {
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.82);
+    border-radius: 20px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.18)),
+      linear-gradient(145deg, rgba(29, 208, 116, 0.5), rgba(7, 116, 194, 0.55));
+    box-shadow:
+      inset 0 2px 0 rgba(255, 255, 255, 0.94),
+      inset 0 -22px 44px rgba(0, 45, 105, 0.22),
+      0 20px 48px rgba(0, 50, 94, 0.3);
+  }
+
+  .player-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.58);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 49, 86, 0.7);
+    background: rgba(1, 56, 99, 0.22);
+  }
+
+  .now-playing {
+    display: grid;
+    grid-template-columns: 180px minmax(0, 1fr);
+    gap: 16px;
+    align-items: center;
+    padding: clamp(16px, 3vw, 24px);
+  }
+
+  .album-art {
+    aspect-ratio: 1;
+    padding: 9px;
+    border: 1px solid rgba(255, 255, 255, 0.82);
+    border-radius: 18px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.26)),
+      rgba(255, 255, 255, 0.42);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      0 12px 26px rgba(0, 38, 77, 0.28);
+  }
+
+  .album-art img,
+  .album-art span {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+  }
+
+  .album-art img {
+    object-fit: cover;
+  }
+
+  .album-art span {
+    display: block;
+    background:
+      radial-gradient(circle at 36% 28%, rgba(255, 255, 255, 0.9), transparent 22%),
+      linear-gradient(145deg, #7ae9ff, #0b91db 52%, #075b9b);
+  }
+
+  .track-screen {
+    min-height: 160px;
+    padding: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.76);
+    border-radius: 16px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(255, 255, 255, 0.32)),
+      rgba(243, 254, 255, 0.7);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.94),
+      inset 0 -10px 22px rgba(16, 133, 190, 0.08);
+  }
+
+  .screen-label {
+    margin-bottom: 10px;
+    color: #075f91;
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  .track-screen h2 {
+    margin-bottom: 8px;
+  }
+
+  .track-screen p {
+    margin-bottom: 0;
+    color: #254f62;
+    font-weight: 800;
+  }
+
+  .transport {
+    display: flex;
+    gap: 9px;
+    padding: 0 24px 22px;
+  }
+
+  .transport span {
+    width: 38px;
+    height: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 999px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.86), rgba(255, 255, 255, 0.28) 45%, rgba(5, 99, 170, 0.9) 46%, rgba(4, 72, 132, 0.96));
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      0 4px 9px rgba(0, 44, 91, 0.24);
+  }
+
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 16px;
+  }
+
+  .artist-panel,
+  .playlist-panel {
+    padding: clamp(18px, 3vw, 26px);
+  }
+
+  .panel-heading {
+    margin-bottom: 16px;
+  }
+
+  .artist-list {
+    display: grid;
+    gap: 9px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: artists;
+  }
+
+  .artist-list li {
+    counter-increment: artists;
+    display: grid;
+    grid-template-columns: 34px 42px minmax(0, 1fr);
+    gap: 10px;
+    align-items: center;
+    min-height: 54px;
+    padding: 8px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.62);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  }
+
+  .artist-list li::before {
+    content: counter(artists, decimal-leading-zero);
+    color: #075f91;
+    font-size: 0.75rem;
+    font-weight: 900;
+  }
+
+  .artist-list img {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .artist-list a,
+  .playlist-card {
+    color: var(--ink-strong);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .artist-list a:hover,
+  .playlist-card:hover span {
+    text-decoration: underline;
+  }
+
+  .playlist-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .playlist-card {
+    display: grid;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.62);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.82);
+  }
+
+  .playlist-card img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.45);
+  }
+
+  .playlist-card small {
+    color: var(--muted);
+    font-weight: 800;
+  }
+
+  .empty-state {
+    margin: 0;
+    padding: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.62);
+    border-radius: 13px;
+    background: rgba(255, 255, 255, 0.5);
+    color: var(--ink);
+    font-weight: 800;
+  }
+
+  @media (max-width: 820px) {
+    .now-playing,
+    .dashboard-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .album-art {
+      max-width: 220px;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .playlist-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

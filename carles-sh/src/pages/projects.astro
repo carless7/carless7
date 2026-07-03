@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const upcomingProjects = [
+  {
+    title: 'Music Recommender',
+    description: 'Write-up pending. The public page will be added when the project story is ready.',
+    tone: 'green',
+  },
+  {
+    title: 'University Platforms',
+    description: 'Coming Soon placeholder for platform ideas and future case studies.',
+    tone: 'blue',
+  },
+  {
+    title: 'Security and XAI',
+    description: 'Coming Soon placeholder for explainability and cybersecurity notes.',
+    tone: 'amber',
+  },
+  {
+    title: 'Space Data',
+    description: 'Coming Soon placeholder for satellite data and data science experiments.',
+    tone: 'rose',
+  },
+];
+---
+
+<Layout title="carles.sh | Projects" description="Project placeholders for carles.sh.">
+  <main class="page-main">
+    <section class="page-hero glass-panel">
+      <div>
+        <p class="eyebrow">Projects</p>
+        <h1>Coming soon, without fake detail.</h1>
+        <p class="lead">
+          This page is intentionally quiet until each project has enough context to deserve a proper page. The structure is
+          already here; the content can arrive later.
+        </p>
+      </div>
+      <aside class="content-card note-card">
+        <p class="eyebrow">Maintenance note</p>
+        <p>Add new projects by editing the `upcomingProjects` array at the top of this Astro page.</p>
+      </aside>
+    </section>
+
+    <section class="project-grid" aria-label="Upcoming project pages">
+      {upcomingProjects.map((project) => (
+        <article class={`project-card content-card ${project.tone}`}>
+          <span aria-hidden="true"></span>
+          <h2>{project.title}</h2>
+          <p>{project.description}</p>
+          <strong>Coming Soon</strong>
+        </article>
+      ))}
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .note-card {
+    padding: 18px;
+  }
+
+  .note-card p:last-child {
+    margin-bottom: 0;
+    color: var(--ink);
+    font-weight: 800;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .project-card {
+    min-height: 230px;
+    padding: 20px;
+  }
+
+  .project-card > span {
+    display: block;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.82);
+    border-radius: 14px;
+    background:
+      radial-gradient(circle at 35% 24%, #fff 0 16%, rgba(255, 255, 255, 0.28) 17% 31%, transparent 32%),
+      linear-gradient(145deg, #82eaff 0%, #0f92dc 52%, #075a9a 100%);
+    box-shadow:
+      inset 0 2px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -8px 14px rgba(0, 45, 105, 0.23),
+      0 5px 12px rgba(0, 62, 118, 0.22);
+  }
+
+  .project-card.green > span {
+    background:
+      radial-gradient(circle at 35% 24%, #fff 0 16%, rgba(255, 255, 255, 0.28) 17% 31%, transparent 32%),
+      linear-gradient(145deg, #c8ff78 0%, #52bd49 52%, #1c7939 100%);
+  }
+
+  .project-card.amber > span {
+    background:
+      radial-gradient(circle at 35% 24%, #fff 0 16%, rgba(255, 255, 255, 0.28) 17% 31%, transparent 32%),
+      linear-gradient(145deg, #ffdc78 0%, #ff9827 52%, #b85218 100%);
+  }
+
+  .project-card.rose > span {
+    background:
+      radial-gradient(circle at 35% 24%, #fff 0 16%, rgba(255, 255, 255, 0.28) 17% 31%, transparent 32%),
+      linear-gradient(145deg, #ffb6e8 0%, #e553a9 52%, #8f2d79 100%);
+  }
+
+  .project-card strong {
+    display: inline-flex;
+    min-height: 32px;
+    align-items: center;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 999px;
+    color: #075f91;
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.88);
+  }
+
+  @media (max-width: 760px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

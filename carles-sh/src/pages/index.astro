@@ -1,0 +1,78 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="carles.sh | Home"
+  description="Personal homepage of Carles: code, research, music, and a few pages still under construction."
+>
+  <main class="page-main">
+    <section class="page-hero glass-panel">
+      <div>
+        <p class="eyebrow">carles.sh</p>
+        <h1>A small web home for code, research, and music.</h1>
+        <p class="lead">
+          I am rebuilding this place as a proper personal site: separate pages, quiet structure, and room for things to
+          grow without pretending everything is finished.
+        </p>
+        <div class="button-row">
+          <a class="aqua-button green" href="/about">Read about me</a>
+          <a class="aqua-button" href="/music">Open music dashboard</a>
+        </div>
+      </div>
+
+      <aside class="home-status content-card">
+        <p class="eyebrow">Site map</p>
+        <ul>
+          <li><a href="/about">About</a><span>ready</span></li>
+          <li><a href="/projects">Projects</a><span>coming soon</span></li>
+          <li><a href="/music">Music</a><span>Spotify powered</span></li>
+        </ul>
+      </aside>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .home-status {
+    padding: 18px;
+  }
+
+  .home-status ul {
+    display: grid;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .home-status li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 12px;
+    align-items: center;
+    min-height: 46px;
+    padding: 9px 11px;
+    border: 1px solid rgba(255, 255, 255, 0.64);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.44);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  }
+
+  .home-status a {
+    color: var(--ink-strong);
+    font-weight: 900;
+    text-decoration: none;
+  }
+
+  .home-status a:hover {
+    text-decoration: underline;
+  }
+
+  .home-status span {
+    color: #075f91;
+    font-size: 0.82rem;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+</style>

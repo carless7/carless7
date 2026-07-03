@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import SpotifyDashboard from '../components/SpotifyDashboard.astro';
+---
+
+<Layout title="carles.sh | Music" description="Spotify-powered music dashboard for carles.sh.">
+  <main class="page-main">
+    <section class="page-hero glass-panel">
+      <div>
+        <p class="eyebrow">Music dashboard</p>
+        <h1>A listening panel for what is playing and what keeps coming back.</h1>
+        <p class="lead">
+          This page is ready for the future Spotify integration, but it is intentionally static while the site runs on
+          GitHub Pages. No secrets, tokens, or private API calls are shipped to the browser.
+        </p>
+        <div class="button-row">
+          <a class="aqua-button green" href="https://github.com/orgs/spotifai-tfg">SpotifAI</a>
+          <a class="aqua-button" href="/about">Back to about</a>
+        </div>
+      </div>
+      <aside class="content-card api-note">
+        <p class="eyebrow">Status</p>
+        <p>
+          Currently not working on the public site. This will move to a small server-side API later so Spotify credentials
+          remain private.
+        </p>
+      </aside>
+    </section>
+
+    <SpotifyDashboard
+      artists={[]}
+      playlists={[]}
+      nowPlaying={null}
+      error="Currently not working on GitHub Pages. A private API will power this widget later."
+    />
+  </main>
+</Layout>
+
+<style>
+  .api-note {
+    padding: 18px;
+  }
+
+  .api-note p:last-child {
+    margin-bottom: 0;
+    color: var(--ink);
+    font-weight: 800;
+  }
+</style>

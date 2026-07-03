@@ -1,0 +1,157 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="carles.sh | About"
+  description="About Carles, Master's Student in Informatics Engineering and AI Researcher at GREIA."
+>
+  <main class="page-main">
+    <section class="about-hero glass-panel">
+      <div class="intro-copy">
+        <p class="eyebrow">Hi there</p>
+        <h1>I'm Carles.</h1>
+        <p class="lead">
+          I am doing a Master's in Informatics Engineering and helping with AI research at
+          <a class="muted-link" href="https://greia.udl.cat/">GREIA</a>. I mostly try to build things that are useful,
+          understandable, and not held together only by hope.
+        </p>
+        <p>
+          Most of my code is Python and C/C++. I like data science, machine learning, and cybersecurity, especially when
+          there is an actual problem to solve and not just a fancy name for a folder full of scripts.
+        </p>
+      </div>
+
+      <aside class="portrait-card content-card" aria-label="Profile summary">
+        <img src="https://github.com/carless7.png" alt="Carles GitHub profile image" loading="lazy" />
+        <div>
+          <strong>Carles</strong>
+          <span>Informatics Engineering | AI Research | GREIA</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="about-grid">
+      <article class="text-window glass-panel">
+        <p class="eyebrow">What I do</p>
+        <h2>Technical work, kept separate from the personal stuff.</h2>
+        <p>
+          My working zone is practical software and applied research. I like tools that make a hard problem easier to
+          inspect: data pipelines, model experiments, low-level performance decisions, and systems that do not hide their
+          trade-offs.
+        </p>
+        <p>
+          I am currently working on a music recommendation project inside the
+          <a class="muted-link" href="https://github.com/orgs/spotifai-tfg">SpotifAI</a> organization.
+        </p>
+      </article>
+
+      <article class="text-window glass-panel">
+        <p class="eyebrow">Who I am</p>
+        <h2>Outside the editor.</h2>
+        <p>
+          I listen to a lot of music, which explains why music projects keep finding their way into my technical work.
+        </p>
+        <p>
+          I also support FC Barcelona, which is character-building whether I asked for it or not.
+        </p>
+      </article>
+    </section>
+
+    <section class="contact-strip glass-panel">
+      <div>
+        <p class="eyebrow">Connect with me</p>
+        <h2>One useful link for now.</h2>
+      </div>
+      <a class="aqua-button green" href="https://www.linkedin.com/in/carles-sanchez">LinkedIn</a>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  .about-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) 300px;
+    gap: clamp(20px, 4vw, 38px);
+    align-items: center;
+    padding: clamp(22px, 4vw, 44px);
+  }
+
+  .intro-copy p:not(.eyebrow) {
+    max-width: 760px;
+  }
+
+  .portrait-card {
+    padding: 14px;
+  }
+
+  .portrait-card img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.82);
+    border-radius: 22px;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.8),
+      0 10px 22px rgba(0, 55, 100, 0.22);
+  }
+
+  .portrait-card div {
+    margin-top: 12px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.66);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .portrait-card strong,
+  .portrait-card span {
+    display: block;
+  }
+
+  .portrait-card strong {
+    color: var(--ink-strong);
+    font-size: 1.3rem;
+  }
+
+  .portrait-card span {
+    margin-top: 4px;
+    color: var(--muted);
+    font-weight: 800;
+    line-height: 1.4;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .text-window {
+    padding: clamp(18px, 3vw, 30px);
+  }
+
+  .contact-strip {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 18px;
+    align-items: center;
+    padding: clamp(18px, 3vw, 28px);
+  }
+
+  .contact-strip h2 {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 820px) {
+    .about-hero,
+    .about-grid,
+    .contact-strip {
+      grid-template-columns: 1fr;
+    }
+
+    .portrait-card {
+      max-width: 340px;
+    }
+  }
+</style>
