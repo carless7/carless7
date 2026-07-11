@@ -4,75 +4,230 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="carles.sh | Home"
-  description="Personal homepage of Carles: code, research, music, and a few pages still under construction."
+  description="The personal web home of Carles Sánchez: software, AI research, music, and useful links."
 >
-  <main class="page-main">
-    <section class="page-hero glass-panel">
-      <div>
-        <p class="eyebrow">carles.sh</p>
-        <h1>A small web home for code, research, and music.</h1>
-        <p class="lead">
-          I am rebuilding this place as a proper personal site: separate pages, quiet structure, and room for things to
-          grow without pretending everything is finished.
-        </p>
-        <div class="button-row">
-          <a class="aqua-button green" href="/about">Read about me</a>
-          <a class="aqua-button" href="/music">Open music dashboard</a>
+  <main class="page-main home-page">
+    <section class="home-top" aria-label="Welcome and site overview">
+      <article class="window welcome-window">
+        <div class="window-title">
+          <strong class="window-label">Welcome to carles.sh</strong>
+          <small>entrance hall</small>
         </div>
-      </div>
+        <div class="window-body reading">
+          <p class="small-label">Hello, visitor</p>
+          <h1>I'm Carles Sánchez.</h1>
+          <p class="identity">MSc Informatics Engineering student and AI researcher at GREIA.</p>
+          <p>This is my small web home for practical software, research notes, music, and the links between them.</p>
+          <p class="currently"><strong>Currently · July 2026:</strong> music recommendation and formal XAI for cybersecurity.</p>
+          <div class="button-row">
+            <a class="bevel-button green" href="/projects">Open project index</a>
+            <a class="bevel-button" href="/music">Enter music room</a>
+          </div>
+        </div>
+      </article>
 
-      <aside class="home-status content-card">
-        <p class="eyebrow">Site map</p>
+      <nav class="sidebar-module directory-window" aria-label="Site directory">
+        <div class="window-title"><h2>Site directory</h2></div>
         <ul>
-          <li><a href="/about">About</a><span>ready</span></li>
-          <li><a href="/projects">Projects</a><span>coming soon</span></li>
-          <li><a href="/music">Music</a><span>Spotify powered</span></li>
+          <li><a href="/projects">Projects</a><span>code &amp; research</span></li>
+          <li><a href="/music">Music</a><span>listening desk</span></li>
+          <li><a href="/about">About</a><span>profile room</span></li>
+          <li><a href="/links">Links</a><span>web directory</span></li>
         </ul>
+      </nav>
+
+      <aside class="sidebar-module status-window">
+        <div class="window-title"><h2>Site status</h2></div>
+        <div class="window-body">
+          <p class="status-line"><span class="status-dot live"></span><span><strong>Research:</strong> active</span></p>
+          <p class="status-line"><span class="status-dot paused"></span><span><strong>Spotify:</strong> checks live API</span></p>
+          <p class="status-line"><span class="status-dot"></span><span><strong>Updated:</strong> July 2026</span></p>
+          <a href="/links">Browse the directory →</a>
+        </div>
       </aside>
+    </section>
+
+    <section class="home-features" aria-label="Selected areas">
+      <article class="window selected-work">
+        <div class="window-title">
+          <h2>Selected technical work</h2>
+          <small>active project</small>
+        </div>
+        <div class="project-summary">
+          <span class="project-badge" aria-hidden="true">S</span>
+          <div>
+            <h3>SpotifAI music recommendation</h3>
+            <p>Applied AI work around music discovery, recommendation, and explainable results.</p>
+            <p class="row-meta">Machine learning · Python · research</p>
+          </div>
+          <a href="https://github.com/orgs/spotifai-tfg">Visit project ↗</a>
+        </div>
+      </article>
+
+      <article class="window music-invite">
+        <div class="window-title"><h2>From the music room</h2></div>
+        <div class="window-body music-body">
+          <span class="record" aria-hidden="true"></span>
+          <div>
+            <p>See what is playing, frequently returned-to artists, and public playlist shelves.</p>
+            <a href="/music">Open the listening desk →</a>
+          </div>
+        </div>
+      </article>
     </section>
   </main>
 </Layout>
 
 <style>
-  .home-status {
-    padding: 18px;
+  .home-top {
+    display: grid;
+    grid-template-areas: 'directory welcome status';
+    grid-template-columns: 180px minmax(0, 1fr) 190px;
+    gap: 12px;
+    align-items: stretch;
   }
 
-  .home-status ul {
-    display: grid;
-    gap: 10px;
+  .welcome-window {
+    grid-area: welcome;
+  }
+
+  .directory-window {
+    grid-area: directory;
+  }
+
+  .status-window {
+    grid-area: status;
+  }
+
+  .identity {
+    color: var(--water-deep);
+    font-weight: bold;
+  }
+
+  .currently {
+    margin-top: 14px;
+    padding: 7px 9px;
+    border: 1px solid #8ac2d8;
+    border-radius: 5px;
+    background: #eaf9fd;
+    box-shadow: inset 0 1px 2px rgba(0, 80, 115, 0.12);
+    font-size: 12px;
+  }
+
+  .directory-window ul {
     margin: 0;
-    padding: 0;
+    padding: 5px 0;
     list-style: none;
   }
 
-  .home-status li {
+  .directory-window li + li {
+    border-top: 1px solid #d2edf5;
+  }
+
+  .directory-window a,
+  .directory-window span {
+    display: block;
+  }
+
+  .directory-window a {
+    padding: 8px 10px 1px;
+    font-weight: bold;
+  }
+
+  .directory-window span {
+    padding: 0 10px 7px;
+    color: var(--muted);
+    font-size: 10px;
+  }
+
+  .status-window .window-body {
+    font-size: 11px;
+  }
+
+  .home-features {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr);
+    gap: 12px;
+  }
+
+  .project-summary {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) auto;
     gap: 12px;
     align-items: center;
-    min-height: 46px;
-    padding: 9px 11px;
-    border: 1px solid rgba(255, 255, 255, 0.64);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.44);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
+    min-height: 94px;
+    padding: 12px;
   }
 
-  .home-status a {
-    color: var(--ink-strong);
-    font-weight: 900;
-    text-decoration: none;
+  .project-summary h3,
+  .project-summary p {
+    margin-bottom: 4px;
   }
 
-  .home-status a:hover {
-    text-decoration: underline;
+  .project-summary > a {
+    font-size: 11px;
+    font-weight: bold;
   }
 
-  .home-status span {
-    color: #075f91;
-    font-size: 0.82rem;
-    font-weight: 900;
-    text-transform: uppercase;
+  .project-badge {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid var(--leaf-deep);
+    border-radius: 6px;
+    color: #fff;
+    font: bold 22px/1 'Trebuchet MS', Verdana, sans-serif;
+    text-shadow: 0 1px 1px #185a31;
+    background: linear-gradient(145deg, #c9f899, var(--leaf) 48%, var(--leaf-deep));
+    box-shadow: inset 0 1px 0 #fff, 0 2px 4px rgba(0, 80, 70, 0.2);
+  }
+
+  .row-meta {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+  .music-body {
+    display: grid;
+    grid-template-columns: 58px 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .record {
+    width: 58px;
+    height: 58px;
+    border: 2px solid #244b60;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--berry) 0 8%, #f8d7ed 9% 13%, #183a4a 14% 22%, #071e29 23% 30%, #254b5c 31% 35%, #071e29 36% 47%, #254b5c 48% 52%, #071e29 53% 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 3px 6px rgba(0, 50, 75, 0.22);
+  }
+
+  @media (max-width: 900px) {
+    .home-top {
+      grid-template-areas: 'welcome welcome' 'directory status';
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .home-top {
+      grid-template-areas: 'welcome' 'directory' 'status';
+      grid-template-columns: 1fr;
+    }
+
+    .home-features {
+      grid-template-columns: 1fr;
+    }
+
+    .project-summary {
+      grid-template-columns: 48px minmax(0, 1fr);
+    }
+
+    .project-summary > a {
+      grid-column: 2;
+    }
   }
 </style>

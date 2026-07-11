@@ -1,131 +1,230 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const upcomingProjects = [
+const projects = [
   {
-    title: 'Music Recommender',
-    description: 'Write-up pending. The public page will be added when the project story is ready.',
-    tone: 'green',
+    badge: 'S',
+    title: 'SpotifAI music recommendation',
+    description: 'Applied AI work exploring music discovery, recommendation, and explainable results.',
+    tags: ['Python', 'machine learning', 'research'],
+    status: 'Active research',
+    year: '2026',
+    href: 'https://github.com/orgs/spotifai-tfg',
+    action: 'Visit project',
   },
   {
-    title: 'University Platforms',
-    description: 'Coming Soon placeholder for platform ideas and future case studies.',
-    tone: 'blue',
-  },
-  {
-    title: 'Security and XAI',
-    description: 'Coming Soon placeholder for explainability and cybersecurity notes.',
-    tone: 'amber',
-  },
-  {
-    title: 'Space Data',
-    description: 'Coming Soon placeholder for satellite data and data science experiments.',
-    tone: 'rose',
+    badge: 'C',
+    title: 'carles.sh',
+    description: 'A hand-built Astro site for technical work, personal interests, and the independent web.',
+    tags: ['Astro', 'CSS', 'personal web'],
+    status: 'Live',
+    year: '2026',
+    href: 'https://github.com/carless7/carless7',
+    action: 'View source',
   },
 ];
 ---
 
-<Layout title="carles.sh | Projects" description="Project placeholders for carles.sh.">
-  <main class="page-main">
-    <section class="page-hero glass-panel">
-      <div>
-        <p class="eyebrow">Projects</p>
-        <h1>Coming soon, without fake detail.</h1>
-        <p class="lead">
-          This page is intentionally quiet until each project has enough context to deserve a proper page. The structure is
-          already here; the content can arrive later.
-        </p>
+<Layout title="carles.sh | Projects" description="Software, research, and experiments by Carles Sánchez.">
+  <main class="page-main projects-page">
+    <header class="window page-heading">
+      <div class="window-title"><strong class="window-label">Project index</strong><small>technical archive</small></div>
+      <div class="window-body">
+        <h1>Projects, research, and useful experiments</h1>
+        <p>Only work with a real public destination is listed. Detailed project files will appear when their problem, role, and result can be documented honestly.</p>
       </div>
-      <aside class="content-card note-card">
-        <p class="eyebrow">Maintenance note</p>
-        <p>Add new projects by editing the `upcomingProjects` array at the top of this Astro page.</p>
-      </aside>
-    </section>
+    </header>
 
-    <section class="project-grid" aria-label="Upcoming project pages">
-      {upcomingProjects.map((project) => (
-        <article class={`project-card content-card ${project.tone}`}>
-          <span aria-hidden="true"></span>
-          <h2>{project.title}</h2>
-          <p>{project.description}</p>
-          <strong>Coming Soon</strong>
-        </article>
-      ))}
-    </section>
+    <div class="two-column">
+      <section class="window project-window" aria-labelledby="project-list-title">
+        <div class="window-title">
+          <h2 id="project-list-title">Chronological project list</h2>
+          <small>{projects.length} public entries</small>
+        </div>
+        <div class="project-list">
+          {projects.map((project) => (
+            <article class="project-row">
+              <span class="project-badge" aria-hidden="true">{project.badge}</span>
+              <div class="project-copy">
+                <h3>{project.title}</h3>
+                <p>{project.description}</p>
+                <ul class="tag-list" aria-label="Topics">
+                  {project.tags.map((tag) => <li>{tag}</li>)}
+                </ul>
+              </div>
+              <dl class="project-meta">
+                <div><dt>Status</dt><dd>{project.status}</dd></div>
+                <div><dt>Year</dt><dd>{project.year}</dd></div>
+              </dl>
+              <a class="project-link" href={project.href}>{project.action} ↗</a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <aside class="sidebar-stack" aria-label="Project index information">
+        <section class="sidebar-module">
+          <div class="window-title"><h2>Topic shelf</h2></div>
+          <div class="window-body">
+            <ul class="plain-list">
+              <li>Machine learning</li>
+              <li>Formal XAI</li>
+              <li>Cybersecurity</li>
+              <li>Data science</li>
+              <li>Systems in C/C++</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="sidebar-module">
+          <div class="window-title"><h2>Status legend</h2></div>
+          <div class="window-body">
+            <p class="status-line"><span class="status-dot live"></span><span><strong>Live</strong> · public and usable</span></p>
+            <p class="status-line"><span class="status-dot"></span><span><strong>Active</strong> · current work</span></p>
+            <p class="status-line"><span class="status-dot archive"></span><span><strong>Archive</strong> · no longer maintained</span></p>
+          </div>
+        </section>
+
+        <section class="sidebar-module">
+          <div class="window-title"><h2>Repositories</h2></div>
+          <div class="window-body">
+            <p><a href="https://github.com/carless7">carless7 on GitHub ↗</a></p>
+            <p><a href="https://github.com/orgs/spotifai-tfg">SpotifAI organization ↗</a></p>
+          </div>
+        </section>
+      </aside>
+    </div>
   </main>
 </Layout>
 
 <style>
-  .note-card {
-    padding: 18px;
-  }
-
-  .note-card p:last-child {
-    margin-bottom: 0;
-    color: var(--ink);
-    font-weight: 800;
-  }
-
-  .project-grid {
+  .project-list {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
   }
 
-  .project-card {
-    min-height: 230px;
-    padding: 20px;
+  .project-row {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) 108px;
+    grid-template-rows: auto auto;
+    gap: 5px 9px;
+    align-items: start;
+    min-height: 88px;
+    padding: 9px 10px;
   }
 
-  .project-card > span {
-    display: block;
-    width: 44px;
-    height: 44px;
-    margin-bottom: 14px;
-    border: 1px solid rgba(255, 255, 255, 0.82);
-    border-radius: 14px;
-    background:
-      radial-gradient(circle at 35% 24%, #fff 0 16%, rgba(255, 255, 255, 0.28) 17% 31%, transparent 32%),
-      linear-gradient(145deg, #82eaff 0%, #0f92dc 52%, #075a9a 100%);
-    box-shadow:
-      inset 0 2px 0 rgba(255, 255, 255, 0.9),
-      inset 0 -8px 14px rgba(0, 45, 105, 0.23),
-      0 5px 12px rgba(0, 62, 118, 0.22);
+  .project-badge,
+  .project-copy {
+    grid-row: 1 / 3;
   }
 
-  .project-card.green > span {
-    background:
-      radial-gradient(circle at 35% 24%, #fff 0 16%, rgba(255, 255, 255, 0.28) 17% 31%, transparent 32%),
-      linear-gradient(145deg, #c8ff78 0%, #52bd49 52%, #1c7939 100%);
+  .project-row + .project-row {
+    border-top: 1px solid #b9dce9;
   }
 
-  .project-card.amber > span {
-    background:
-      radial-gradient(circle at 35% 24%, #fff 0 16%, rgba(255, 255, 255, 0.28) 17% 31%, transparent 32%),
-      linear-gradient(145deg, #ffdc78 0%, #ff9827 52%, #b85218 100%);
+  .project-row:nth-child(even) {
+    background: #eefaff;
   }
 
-  .project-card.rose > span {
-    background:
-      radial-gradient(circle at 35% 24%, #fff 0 16%, rgba(255, 255, 255, 0.28) 17% 31%, transparent 32%),
-      linear-gradient(145deg, #ffb6e8 0%, #e553a9 52%, #8f2d79 100%);
+  .project-badge {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    border: 1px solid var(--water-deep);
+    border-radius: 6px;
+    color: #fff;
+    font: bold 21px/1 'Trebuchet MS', Verdana, sans-serif;
+    text-shadow: 0 1px 1px #03496d;
+    background: linear-gradient(145deg, #8feaff, var(--water) 54%, var(--water-deep));
+    box-shadow: inset 0 1px 0 #fff, 0 2px 4px rgba(0, 70, 100, 0.2);
   }
 
-  .project-card strong {
-    display: inline-flex;
-    min-height: 32px;
-    align-items: center;
-    padding: 6px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.72);
-    border-radius: 999px;
-    color: #075f91;
-    background: rgba(255, 255, 255, 0.5);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.88);
+  .project-copy h3,
+  .project-copy p {
+    margin-bottom: 5px;
   }
 
-  @media (max-width: 760px) {
-    .project-grid {
-      grid-template-columns: 1fr;
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tag-list li {
+    padding: 2px 5px;
+    border: 1px solid #9fcddd;
+    border-radius: 3px;
+    color: var(--muted);
+    font-size: 9px;
+    font-weight: bold;
+    background: #edfaff;
+  }
+
+  .project-meta {
+    grid-column: 3;
+    grid-row: 1;
+    margin: 0;
+    font-size: 10px;
+  }
+
+  .project-meta div + div {
+    margin-top: 6px;
+  }
+
+  .project-meta dt {
+    color: var(--muted);
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .project-meta dd {
+    margin: 1px 0 0;
+    color: var(--ink);
+  }
+
+  .project-link {
+    grid-column: 3;
+    grid-row: 2;
+    align-self: end;
+    justify-self: start;
+    font-size: 11px;
+    font-weight: bold;
+  }
+
+  @media (max-width: 520px) {
+    .project-row {
+      grid-template-columns: 42px minmax(0, 1fr);
+      grid-template-rows: auto;
+    }
+
+    .project-badge,
+    .project-copy {
+      grid-row: auto;
+    }
+
+    .project-badge {
+      width: 42px;
+      height: 42px;
+    }
+
+    .project-meta {
+      grid-column: 2;
+      grid-row: auto;
+      display: flex;
+      gap: 14px;
+    }
+
+    .project-meta div + div {
+      margin-top: 0;
+    }
+
+    .project-link {
+      grid-column: 2;
+      grid-row: auto;
+      justify-self: start;
     }
   }
 </style>

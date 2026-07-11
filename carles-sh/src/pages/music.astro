@@ -3,47 +3,68 @@ import Layout from '../layouts/Layout.astro';
 import SpotifyDashboard from '../components/SpotifyDashboard.astro';
 ---
 
-<Layout title="carles.sh | Music" description="Spotify-powered music dashboard for carles.sh.">
-  <main class="page-main">
-    <section class="page-hero glass-panel">
-      <div>
-        <p class="eyebrow">Music dashboard</p>
-        <h1>A listening panel for what is playing and what keeps coming back.</h1>
-        <p class="lead">
-          This page is ready for the future Spotify integration, but it is intentionally static while the site runs on
-          GitHub Pages. No secrets, tokens, or private API calls are shipped to the browser.
-        </p>
-        <div class="button-row">
-          <a class="aqua-button green" href="https://github.com/orgs/spotifai-tfg">SpotifAI</a>
-          <a class="aqua-button" href="/about">Back to about</a>
+<Layout title="carles.sh | Music" description="Carles's listening room, Spotify activity, artists, and public playlists.">
+  <main class="page-main music-page">
+    <header class="window music-banner">
+      <div class="window-title"><strong class="window-label">Music room / personal listening desk</strong><small>room 03</small></div>
+      <div class="music-banner-body">
+        <span class="music-note" aria-hidden="true">♫</span>
+        <div>
+          <h1>Listening notes, playlists, and SpotifAI</h1>
+          <p>Live data comes from a private server. If Spotify is offline, this room stays complete and says so.</p>
         </div>
       </div>
-      <aside class="content-card api-note">
-        <p class="eyebrow">Status</p>
-        <p>
-          Currently not working on the public site. This will move to a small server-side API later so Spotify credentials
-          remain private.
-        </p>
-      </aside>
-    </section>
+    </header>
 
-    <SpotifyDashboard
-      artists={[]}
-      playlists={[]}
-      nowPlaying={null}
-      error="Currently not working on GitHub Pages. A private API will power this widget later."
-    />
+    <SpotifyDashboard />
   </main>
 </Layout>
 
 <style>
-  .api-note {
-    padding: 18px;
+  .music-banner-body {
+    display: grid;
+    grid-template-columns: 52px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    padding: 11px 14px;
+    background: linear-gradient(90deg, #f8feff, #e4f8fd 70%, #f8e8f3);
   }
 
-  .api-note p:last-child {
-    margin-bottom: 0;
-    color: var(--ink);
-    font-weight: 800;
+  .music-banner h1,
+  .music-banner p {
+    margin-bottom: 3px;
+  }
+
+  .music-note {
+    display: grid;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+    border: 1px solid #7e3567;
+    border-radius: 50%;
+    color: #fff;
+    font: bold 25px/1 Georgia, serif;
+    text-shadow: 0 1px 1px #6c2859;
+    background: radial-gradient(circle at 32% 23%, #fff 0 8%, rgba(255,255,255,.55) 9% 19%, transparent 20%), linear-gradient(145deg, #f2a5d5, var(--berry) 54%, #813367);
+    box-shadow: inset 0 1px 0 #fff, 0 3px 6px rgba(90, 35, 75, .2);
+  }
+
+  @media (max-width: 520px) {
+    .music-banner-body {
+      grid-template-columns: 32px minmax(0, 1fr);
+      gap: 8px;
+      padding: 8px 10px;
+    }
+
+    .music-banner h1 {
+      font-size: 22px;
+      line-height: 1.15;
+    }
+
+    .music-note {
+      width: 32px;
+      height: 32px;
+      font-size: 16px;
+    }
   }
 </style>

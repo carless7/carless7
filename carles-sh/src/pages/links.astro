@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const groups = [
+  {
+    title: 'Carles online',
+    links: [
+      { label: 'GitHub', host: 'github.com/carless7', href: 'https://github.com/carless7', note: 'Code, repositories, and public project activity.' },
+      { label: 'LinkedIn', host: 'linkedin.com', href: 'https://www.linkedin.com/in/carles-sanchez', note: 'Professional profile and current experience.' },
+    ],
+  },
+  {
+    title: 'Research & study',
+    links: [
+      { label: 'GREIA', host: 'greia.udl.cat', href: 'https://greia.udl.cat/', note: 'Research group for energy, AI, and related applied work.' },
+      { label: 'University of Lleida', host: 'udl.cat', href: 'https://www.udl.cat/', note: 'University home and institutional information.' },
+    ],
+  },
+  {
+    title: 'Projects elsewhere',
+    links: [
+      { label: 'SpotifAI', host: 'github.com/orgs/spotifai-tfg', href: 'https://github.com/orgs/spotifai-tfg', note: 'Music recommendation project organization and public code.' },
+    ],
+  },
+];
+---
+
+<Layout title="carles.sh | Links" description="A curated personal web directory from carles.sh.">
+  <main class="page-main links-page">
+    <header class="window page-heading">
+      <div class="window-title"><strong class="window-label">Personal web directory</strong><small>links room</small></div>
+      <div class="window-body">
+        <h1>Useful places beyond this site</h1>
+        <p>A small, checked directory of profiles, research, study, and related projects.</p>
+      </div>
+    </header>
+
+    <div class="two-column">
+      <section class="window directory-board" aria-label="External link directory">
+        {groups.map((group) => (
+          <section class="directory-group">
+            <div class="section-bar"><h2>{group.title}</h2><small>{group.links.length} {group.links.length === 1 ? 'link' : 'links'}</small></div>
+            <div class="directory-rows">
+              {group.links.map((link) => (
+                <a class="directory-row" href={link.href}>
+                  <strong>{link.label}</strong>
+                  <span class="host">{link.host} ↗</span>
+                  <span class="note">{link.note}</span>
+                </a>
+              ))}
+            </div>
+          </section>
+        ))}
+      </section>
+
+      <aside class="sidebar-stack" aria-label="Directory information">
+        <section class="sidebar-module">
+          <div class="window-title"><h2>Directory key</h2></div>
+          <div class="window-body">
+            <p><strong>↗ External link</strong><br />Leaves carles.sh using a regular web link.</p>
+            <p class="status-line"><span class="status-dot live"></span><span>Checked and currently public</span></p>
+          </div>
+        </section>
+
+        <section class="sidebar-module">
+          <div class="window-title"><h2>Last checked</h2></div>
+          <div class="window-body">
+            <p><strong>July 2026</strong></p>
+            <p>If a link has moved, the main <a href="https://github.com/carless7">GitHub profile</a> is the best fallback.</p>
+          </div>
+        </section>
+
+        <section class="sidebar-module">
+          <div class="window-title"><h2>Return route</h2></div>
+          <div class="window-body">
+            <a class="bevel-button green" href="/">Back to the entrance</a>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .directory-board {
+    display: grid;
+  }
+
+  .directory-group + .directory-group {
+    border-top: 1px solid var(--line-blue);
+  }
+
+  .directory-rows {
+    display: grid;
+  }
+
+  .directory-row {
+    display: grid;
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: 2px 12px;
+    min-height: 58px;
+    padding: 9px 12px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .directory-row + .directory-row {
+    border-top: 1px solid #d0eaf3;
+  }
+
+  .directory-row:nth-child(even) {
+    background: #f0fbfe;
+  }
+
+  .directory-row:hover {
+    background: #e0f6fc;
+  }
+
+  .directory-row strong {
+    color: var(--water-deep);
+  }
+
+  .host {
+    justify-self: end;
+    color: var(--leaf-deep);
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+  .note {
+    grid-column: 1 / -1;
+    color: var(--muted);
+    font-size: 11px;
+  }
+
+  @media (max-width: 520px) {
+    .directory-row {
+      grid-template-columns: 1fr;
+    }
+
+    .host {
+      justify-self: start;
+    }
+
+    .note {
+      grid-column: auto;
+    }
+  }
+</style>

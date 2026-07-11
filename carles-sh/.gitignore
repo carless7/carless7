@@ -2,6 +2,11 @@
 dist/
 # generated types
 .astro/
+worker-configuration.d.ts
+
+# Cloudflare build metadata and local secrets
+.wrangler/
+.dev.vars
 
 # dependencies
 node_modules/

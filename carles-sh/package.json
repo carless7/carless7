@@ -3,15 +3,23 @@
   "type": "module",
   "version": "0.0.1",
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.18.0"
   },
   "scripts": {
     "dev": "astro dev",
+    "test": "node --test",
     "build": "astro build",
     "preview": "astro preview",
+    "typegen": "wrangler types",
+    "deploy": "wrangler deploy",
+    "deploy:dry-run": "wrangler deploy --dry-run",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.7.0",
     "astro": "^6.4.7"
+  },
+  "devDependencies": {
+    "wrangler": "^4.110.0"
   }
 }
